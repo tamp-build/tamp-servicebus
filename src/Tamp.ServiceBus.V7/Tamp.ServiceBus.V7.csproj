@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+    <RootNamespace>Tamp.ServiceBus.V7</RootNamespace>
+    <AssemblyName>Tamp.ServiceBus.V7</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Package">
+    <PackageId>Tamp.ServiceBus.V7</PackageId>
+    <Description>Tamp library-mode wrapper for Azure Service Bus 7.x — admin CRUD (queue / topic / subscription / rule) and topology convergence wait helper. Useful for CI-time topology management and local-dev emulator harnesses (microsoft/azure-messaging-servicebus-emulator). Not a CLI wrapper; uses Azure.Messaging.ServiceBus.Administration directly.</Description>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(TampCorePath)" Condition="'$(TampCoreMode)' == 'project'" />
+    <PackageReference Include="Tamp.Core" Condition="'$(TampCoreMode)' == 'package'" />
+    <PackageReference Include="Azure.Messaging.ServiceBus" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All" />
+  </ItemGroup>
+
+</Project>
