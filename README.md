@@ -129,9 +129,13 @@ into `EnsureQueueAsync` / `EnsureTopicAsync` / `EnsureSubscriptionAsync` /
   matches the "ensure" semantics.
 - Symmetric `DeleteXxxIfExistsAsync` skips when absent.
 
-Per `Tamp.Core ≥ 1.0.6`'s `InternalsVisibleTo` grant, `Secret.Reveal()`
-is called inside the wrapper — your secret value is never stringified
-into a log line.
+`Secret.Reveal()` is called inside the wrapper to extract the connection
+string when constructing the management client — your secret value is
+never stringified into a log line. (Pre-Tamp.Core 1.6.0 this required
+an `InternalsVisibleTo` grant on `Tamp.ServiceBus.V7` in `Tamp.Core/AssemblyInfo.cs`;
+1.6.0 made `Reveal()` public + TAMP004-gated, so the IVT grant is no
+longer load-bearing. The existing `Tamp.Core ≥ 1.0.6` minimum stays
+for back-compat.)
 
 ## What's NOT in v0.1.0
 
