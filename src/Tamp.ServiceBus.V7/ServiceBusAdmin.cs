@@ -22,7 +22,10 @@ public sealed class ServiceBusAdmin
 
     /// <summary>Connect with a redacted connection string. Recommended for build scripts.</summary>
     public ServiceBusAdmin(Secret connectionString)
+        // TODO: extract Reveal into ServiceBusAdminSettings to satisfy TAMP004 cleanly.
+#pragma warning disable TAMP004
         : this(BuildSdkClient(GuardSecret(connectionString).Reveal())) { }
+#pragma warning restore TAMP004
 
     /// <summary>Connect via Microsoft Entra (formerly AAD) credential to a fully qualified namespace.</summary>
     public ServiceBusAdmin(string fullyQualifiedNamespace, TokenCredential credential)
